@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="description"
+			content="Latent Consistency Models: Synthesizing High-Resolution Images with Few-step Inference">
+		<meta name="keywords" content="LCM">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Latent Consistency Models: Synthesizing High-Resolution Images with Few-step Inference</title>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+
+			gtag('js', new Date());
+
+			gtag('config', 'G-PYVRSFMDRL');
+		</script>
+		<link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+		<link rel="stylesheet" href="./static/css/bulma.min.css">
+		<link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+		<link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+		<link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+		<link rel="stylesheet" href="./static/swiper.min.css">
+		<script src="./static/swiper.min.js"></script>
+
+
+		<style>
+			@font-face {
+				font-family: 'HarmonyOS';
+				src: url('./static/font/HarmonyOS_Sans_SC_Light.ttf') format('truetype');
+			}
+
+			@font-face {
+				font-family: 'SourceHanSerifCN-Heavy';
+				src: url('./static/font/SourceHanSerifCN-Heavy.otf') format('truetype');
+			}
+		</style>
+		<link rel="stylesheet" href="./static/css/bootstrap.min.css">
+		<link rel="stylesheet" href="./static/css/layout.css">
+		<link rel="stylesheet" href="./static/css/animation.css">
+		<link rel="stylesheet" href="./static/css/media.css">
+
+
+		<script src="./static/js/jquery-3.5.1.min.js"></script>
+		<script defer src="./static/js/fontawesome.all.min.js"></script>
+		<script src="./static/js/bulma-carousel.min.js"></script>
+		<script src="./static/js/bulma-slider.min.js"></script>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<img style="width:100%;" src="./static/banner.jpg" alt="" />
+			</div>
+			<div class="page-title"
+				style="padding:2vh 1vw 0vh 1vw;display:flex;flex-direction:column;align-items:center;">
+				<h1>Latent Consistency Models</h1>
+				<h2>Synthesizing High-Resolution Images with Few-step Inference</h2>
+			</div>
+			<div class="row">
+				<div class="col-12 link">
+					<div class="row">
+						<div class="pc-generated" style="width:100%;">
+							<div class="" style="display:flex;justify-content:center;width:100%;">
+								<div class="newTitlePc">
+									<div class="title-link">
+										<a href="https://luosiallen.github.io">Simian Luo*</a>
+									</div>
+									<div class="title-link">
+										<a href="https://scholar.google.com/citations?user=MSdTQToAAAAJ&hl=en">Yiqin
+											Tan*</a>
+									</div>
+									<div class="title-link">
+										<a href="http://people.iiis.tsinghua.edu.cn/~huang/">Longbo Huang <span
+												class="code-text">&dagger;</span></a>
+									</div>
+									<div class="title-link">
+										<a href="https://people.iiis.tsinghua.edu.cn/~jianli/">Jian
+											Li <span class="code-text">&dagger;</span></a>
+									</div>
+									<div class="title-link">
+										<a href="https://hangzhaomit.github.io/">Hang Zhao <span
+												class="code-text">&dagger;</span></a>
+									</div>
+									<div class="title-link mob-generated"></div>
+								</div>
+							</div>
+						</div>
+						<div class="newTitle mob-generated">
+							<div class="title-link">
+								<a href="https://luosiallen.github.io">Simian Luo*</a>
+							</div>
+							<div class="title-link">
+								<a href="https://scholar.google.com/citations?user=MSdTQToAAAAJ&hl=en">Yiqin
+									Tan*</a>
+							</div>
+							<div class="title-link">
+								<a href="http://people.iiis.tsinghua.edu.cn/~huang/">Longbo
+									Huang <span class="code-text">&dagger;</span> </a>
+							</div>
+							<div class="title-link">
+								<a href="https://people.iiis.tsinghua.edu.cn/~jianli/">Jian
+									Li <span class="code-text">&dagger;</span></a>
+							</div>
+							<div class="title-link">
+								<a href="https://hangzhaomit.github.io/">Hang Zhao <span class="code-text">&dagger;</span></a>
+							</div>
+							<div class="title-link mob-generated"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="background-block row newBtnLayout">
+				<div class="newBtnLayout-shadow">
+					<div class="col-12">
+						<div class="mob-inst-text" style="padding:0 0 10px 0;text-align:center;font-size:30px;">Institute
+							for Interdisciplinary
+							Information Sciences,
+							Tsinghua University</div>
+					</div>
+					<div class="button-flex">
+						<a href="https://arxiv.org/abs/2310.04378.pdf" class="button-link">
+							<span class="icon">
+								<i class="ai ai-arxiv"></i>
+							</span>
+							<span>arXiv Paper</span>
+						</a>
+						<a href="https://github.com/luosiallen/latent-consistency-model" class="button-link">
+							<span class="icon">
+								<i class="fab fa-github"></i>
+							</span>
+							<span>Code</span>
+						</a>
+						<a href="https://huggingface.co/spaces/SimianLuo/Latent_Consistency_Model"
+							class="button-link">🔥
+							Hugging Face 🤗 Demo </a>
+						<a href="https://huggingface.co/SimianLuo/LCM_Dreamshaper_v7" class="button-link">Hugging Face
+							🤗
+							Model </a>
+					</div>
+				</div>
+			</div>
+			<div class="row text-center">
+				<div class="col-12 mob-lcms-top lcms-text">
+					" LCMs: The next generation of generative models after Latent Diffusion Models (LDMs). "
+				</div>
+			</div>
+			<div class="background-block row mob-bottom" style="padding-bottom:5vh;">
+				<div class="col-12 Abstract-box mob-col-12" style="padding:0 !important;">
+					<div class="Abstract title-layout">
+						<h3 class="font-ma">Abstract</h3>
+					</div>
+				</div>
+				<div class="col-1"></div>
+				<div class="col-10 mob-col-12" style="padding:0;">
+					<div class="abstract-text">
+						We propose Latent Consistency Models (<strong>LCMs</strong>) to overcome the slow iterative
+						sampling process of Latent Diffusion models (LDMs), enabling fast inference with minimal steps
+						on any pre-trained LDMs (e.g Stable Diffusion).
+					</div>
+					<div class="abstract-text">
+						Viewing the guided reverse diffusion process as solving an <strong>augmented probability flow
+							ODE (PF-ODE)</strong> , LCMs predict its solution directly in latent space, achieving super
+						fast inference with few steps.
+					</div>
+					<div class="abstract-text">
+						A high-quality 768x768 LCM, distilled from Stable Diffusion, requires only <strong>32 A100 GPU
+							training hours</strong> (8 node for only 4 hours) for 2~4-step inference.
+					</div>
+				</div>
+				<div class="col-1"></div>
+			</div>
+			<div class="background-block row mob-bottom" style="padding-bottom:3vh;">
+				<div class="col-12 Abstract-box mob-col-12" style="padding:0 !important;">
+					<div class="Abstract title-layout">
+						<h3 class="font-ma">Few-Step Generated Images</h3>
+					</div>
+				</div>
+				<div class="col-1"></div>
+				<div class="col-10 mob-col-12 abstract-text-box" style="padding:0;">
+					<div class="abstract-text">
+						Images generated by Latent Consistency Models (LCMs). LCMs can be distilled from any
+						pre-trained Stable Diffusion (SD) in only 4,000 training steps (~32 A100 GPU Hours) for
+						generating high quality 768 x 768 resolution images in 2~4 steps or even one step ,
+						significantly accelerating text-to-image generation. We employ LCM to distill the
+						Dreamshaper-V7 version of SD in just 4,000 training iterations.
+					</div>
+				</div>
+				<div class="col-1"></div>
+				<div class="col-12 Abstract-box mob-col-12" style="padding:0 !important;">
+					<div class="Abstract title-layout">
+						<h3 class="font-ma">4-Step Inference</h3>
+					</div>
+				</div>
+				<div class="col-12">
+					<div class="generated-imageBox1">
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container1">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="3000">
+										<img class="clickImage"
+											src="./static/images/4Step_Image/realistic_88_sample_1.png" alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="3000">
+										<img class="clickImage clickImage2"
+											src="./static/images/4Step_Image/dreamer_325_sample_1.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container2">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="5000">
+										<img class="clickImage" src="./static/images/4Step_Image/21.png" alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="5000">
+										<img class="clickImage clickImage2"
+											src="./static/images/4Step_Image/dreamer_373_sample_0.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container3">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="7000">
+										<img class="clickImage"
+											src="./static/images/4Step_Image/realistic_115_sample_0.png" alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="7000">
+										<img class="clickImage clickImage2"
+											src="./static/images/4Step_Image/dreamer_224_sample_0.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container4">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="10000">
+										<img class="clickImage"
+											src="./static/images/4Step_Image/dreamer_457_sample_1.png" alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="10000">
+										<img class="clickImage clickImage2"
+											src="./static/images/4Step_Image/realistic_232_sample_0.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="generated-imageBox1">
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container5">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="12000">
+										<img class="clickImage"
+											src="./static/images/4Step_Image/dreamer_346_sample_0.png" alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="12000">
+										<img class="clickImage"
+											src="./static/images/4Step_Image/dreamer_477_sample_2.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container6">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="6000">
+										<img class="clickImage"
+											src="./static/images/4Step_Image/dreamer_365_sample_1.png" alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="6000">
+										<img class="clickImage"
+											src="./static/images/4Step_Image/dreamer_429_sample_0.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container7">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="4000">
+										<img class="clickImage"
+											src="./static/images/4Step_Image/realistic_406_sample_4.png" alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="4000">
+										<img class="clickImage"
+											src="./static/images/4Step_Image/dreamer_421_sample_0.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container8">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="14000">
+										<img class="clickImage"
+											src="./static/images/4Step_Image/dreamer_484_sample_0.png" alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="14000">
+										<img class="clickImage"
+											src="./static/images/4Step_Image/realistic_8_sample_0.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 Abstract-box mob-col-12" style="padding:0 !important;margin-top:2vh;">
+					<div class="Abstract title-layout">
+						<h3 class="font-ma">2-Step Inference</h3>
+					</div>
+				</div>
+				<div class="col-12">
+					<div class="generated-imageBox1">
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container9">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="3000">
+										<img class="clickImage" src="./static/images/2Step_Image/dreamer_5_sample_1.png"
+											alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="3000">
+										<img class="clickImage"
+											src="./static/images/2Step_Image/dreamer_286_sample_3.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container10">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="6000">
+										<img class="clickImage"
+											src="./static/images/2Step_Image/realistic_212_sample_1.png" alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="6000">
+										<img class="clickImage"
+											src="./static/images/2Step_Image/dreamer_297_sample_0.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container11">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="9000">
+										<img class="clickImage"
+											src="./static/images/2Step_Image/dreamer_15_sample_3.png" alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="9000">
+										<img class="clickImage"
+											src="./static/images/2Step_Image/realistic_128_sample_0.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container12">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="15000">
+										<img class="clickImage" src="./static/images/2Step_Image/realistic_sample_4.png"
+											alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="15000">
+										<img class="clickImage"
+											src="./static/images/2Step_Image/realistic_132_sample_0.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 Abstract-box mob-col-12" style="padding:0 !important;margin-top:2vh;">
+					<div class="Abstract title-layout">
+						<h3 class="font-ma">1-Step Inference</h3>
+					</div>
+				</div>
+				<div class="col-12">
+					<div class="generated-imageBox1">
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container29">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="3000">
+										<img class="clickImage" src="./static/images/1Step_Image/dreamshaper_853_2.png"
+											alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="3000">
+										<img class="clickImage" src="./static/images/1Step_Image/dreamshaper_864_2.png"
+											alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container30">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="6000">
+										<img class="clickImage" src="./static/images/1Step_Image/dreamshaper_993_2.png"
+											alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="6000">
+										<img class="clickImage"
+											src="./static/images/1Step_Image/realistic_88_sample_2.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container31">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="9000">
+										<img class="clickImage"
+											src="./static/images/1Step_Image/realistic_172_sample_1.png" alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="9000">
+										<img class="clickImage"
+											src="./static/images/1Step_Image/realistic_139_sample_1.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container32">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="12000">
+										<img class="clickImage" src="./static/images/1Step_Image/sample_3.png" alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="12000">
+										<img class="clickImage" src="./static/images/1Step_Image/dreamshaper_991_2.png"
+											alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="background-block row mob-bottom" style="padding-bottom:5vh;">
+				<div class="col-12 Abstract-box mob-col-12" style="padding:0 !important;">
+					<div class="Abstract title-layout">
+						<h3 class="font-ma">More Generation Results (4-Steps)</h3>
+					</div>
+				</div>
+				<div class="col-1"></div>
+				<div class="col-10 mob-col-12 abstract-text-box" style="padding:0;">
+					<div class="abstract-text" style="text-align: center;">
+						More generated images results with LCM <strong style="color:#fff;">4-Step inference (768 x
+							768
+							Resolution)</strong>. We employ
+						LCM to distill the Dreamshaper-V7 version of SD in just 4,000 training iterations.
+					</div>
+				</div>
+				<div class="col-1"></div>
+				<div class="col-12">
+					<div class="generated-imageBox1">
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container13">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="3000">
+										<img class="clickImage clickImage1" src="./static/images/4Step_Image/1.png"
+											alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="3000">
+										<img class="clickImage clickImage2" src="./static/images/4Step_Image/9.png"
+											alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container14">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="5000">
+										<img class="clickImage clickImage1" src="./static/images/4Step_Image/2.png"
+											alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="5000">
+										<img class="clickImage clickImage2" src="./static/images/4Step_Image/10.png"
+											alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container15">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="7000">
+										<img class="clickImage clickImage1" src="./static/images/4Step_Image/3.png"
+											alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="7000">
+										<img class="clickImage clickImage2" src="./static/images/4Step_Image/11.png"
+											alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container16">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="10000">
+										<img class="clickImage clickImage1" src="./static/images/4Step_Image/4.png"
+											alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="10000">
+										<img class="clickImage clickImage2" src="./static/images/4Step_Image/12.png"
+											alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container17">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="12000">
+										<img class="clickImage clickImage1" src="./static/images/4Step_Image/5.png"
+											alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="12000">
+										<img class="clickImage clickImage2" src="./static/images/4Step_Image/13.png"
+											alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container18">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="6000">
+										<img class="clickImage clickImage1" src="./static/images/4Step_Image/6.png"
+											alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="6000">
+										<img class="clickImage clickImage2" src="./static/images/4Step_Image/14.png"
+											alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container19">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="4000">
+										<img class="clickImage clickImage1" src="./static/images/4Step_Image/7.png"
+											alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="4000">
+										<img class="clickImage clickImage2" src="./static/images/4Step_Image/15.png"
+											alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container20">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="14000">
+										<img class="clickImage clickImage1" src="./static/images/4Step_Image/8.png"
+											alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="14000">
+										<img class="clickImage clickImage2" src="./static/images/4Step_Image/16.png"
+											alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="background-block row mob-bottom" style="padding-bottom:5vh;">
+				<div class="col-12 Abstract-box mob-col-12" style="padding:0 !important;">
+					<div class="Abstract title-layout">
+						<h3 class="font-ma">More Generation Results (2-Steps)</h3>
+					</div>
+				</div>
+				<div class="col-1"></div>
+				<div class="col-10 mob-col-12 abstract-text-box" style="padding:0;">
+					<div class="abstract-text" style="text-align:center;">
+						More generated images results with LCM <strong style="color:#fff;">2-Step inference (768 x
+							768
+							Resolution)</strong>. We employ
+						LCM to distill the Dreamshaper-V7 version of SD in just 4,000 training iterations.
+					</div>
+				</div>
+				<div class="col-1"></div>
+				<div class="col-12">
+					<div class="generated-imageBox1">
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container21">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="5000">
+										<img class="clickImage clickImage1"
+											src="./static/images/2Step_Image/realistic_96_sample_4.png" alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="5000">
+										<img class="clickImage clickImage2"
+											src="./static/images/2Step_Image/dreamer_141_sample_1.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container22">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="3000">
+										<img class="clickImage clickImage1"
+											src="./static/images/2Step_Image/realistic_225_sample_4.png" alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="3000">
+										<img class="clickImage clickImage2"
+											src="./static/images/2Step_Image/realistic_225_sample_4.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container23">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="9000">
+										<img class="clickImage clickImage1"
+											src="./static/images/2Step_Image/realistic_435_sample_4.png" alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="9000">
+										<img class="clickImage clickImage2"
+											src="./static/images/2Step_Image/realistic_164_sample_2.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container24">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="7000">
+										<img class="clickImage clickImage1"
+											src="./static/images/2Step_Image/dreamer_222_sample_2.png" alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="7000">
+										<img class="clickImage clickImage2"
+											src="./static/images/2Step_Image/realistic_192_sample_3.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="generated-imageBox1">
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container25">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="10000">
+										<img class="clickImage clickImage1"
+											src="./static/images/2Step_Image/dreamer_5_sample_1.png" alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="10000">
+										<img class="clickImage clickImage2"
+											src="./static/images/2Step_Image/realistic_280_sample_0.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container26">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="12000">
+										<img class="clickImage clickImage1"
+											src="./static/images/2Step_Image/dreamer_145_sample_1.png" alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="12000">
+										<img class="clickImage clickImage2"
+											src="./static/images/2Step_Image/realistic_61_sample_1.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container27">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="4000">
+										<img class="clickImage clickImage1"
+											src="./static/images/2Step_Image/dreamer_231_sample_0.png" alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="4000">
+										<img class="clickImage clickImage2"
+											src="./static/images/2Step_Image/realistic_478_sample_1.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="image-box" style="flex:1;">
+							<div class="swiper-container swiper-container28">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="16000">
+										<img class="clickImage clickImage1"
+											src="./static/images/2Step_Image/dreamer_68_sample_1.png" alt="" />
+									</div>
+									<div class="swiper-slide swiper-no-swiping" data-swiper-autoplay="16000">
+										<img class="clickImage clickImage2"
+											src="./static/images/2Step_Image/realistic_174_sample_1.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="background-block row mob-bottom" style="padding-bottom:5vh;">
+				<div class="col-12 Abstract-box mob-col-12" style="padding:0 !important;">
+					<div class="Abstract title-layout">
+						<h3 class="font-ma">Latent Consistency Fine-tuning (LCF)</h3>
+					</div>
+				</div>
+				<div class="col-1"></div>
+				<div class="col-10 mob-col-12 abstract-text-box" style="padding:0;">
+					<div class="abstract-text">
+						<p>
+							<strong style="color:#fff;">
+								LCF is a fine-tuning method designed for pretrained LCM. LCF enables efficient few-step
+								inference on customized datasets without teacher diffusion model, presenting a viable
+								alternative to directly finetune a pretrained LCM.
+							</strong>
+						</p>
+						<p>
+							4-step LCMs using Latent Consistency Fine-tuning (LCF) on two customized datasets: Pokemon
+							Dataset (left), Simpsons Dataset (right). Through LCF, LCM produces images with customized
+							styles.
+						</p>
+					</div>
+				</div>
+				<div class="col-1"></div>
+				<div class="col-12">
+					<img style="margin-top:1vh;width:100%;" src="./static/images/LCT_v1.jpg" alt="" />
+				</div>
+			</div>
+
+			<div class="background-block row mob-bottom" style="padding-bottom:5vh;">
+				<div class="col-12 Abstract-box mob-col-12" style="padding:0 !important;">
+					<div class="Abstract title-layout">
+						<h3 class="font-ma">BibTeX</h3>
+					</div>
+				</div>
+				<div class="col-10 mob-col-12 abstract-text-box" style="padding:0;">
+
+				</div>
+				<div class="col-12">
+					<div class="code" style="width:100%;">
+						<pre>@misc{luo2023latent,
+  title={Latent Consistency Models: Synthesizing High-Resolution Images with Few-Step Inference},
+  author={Simian Luo and Yiqin Tan and Longbo Huang and Jian Li and Hang Zhao},
+  year={2023},
+  eprint={2310.04378},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV}
+}</pre>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</body>
+	<!-- <script src="./static/js/index.js"></script> -->
+	<script>
+		// $('.code-text').text('')
+		var mySwiper1 = new Swiper('.swiper-container1', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo1(1)
+					} else {
+						slideTo1(0)
+					}
+				},
+			},
+		})
+
+		function slideTo1(index) {
+			mySwiper1.slideTo(index);
+		}
+		var mySwiper2 = new Swiper('.swiper-container2', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo2(1)
+					} else {
+						slideTo2(0)
+					}
+				},
+			},
+		})
+
+		function slideTo2(index) {
+			mySwiper2.slideTo(index);
+		}
+		var mySwiper3 = new Swiper('.swiper-container3', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo3(1)
+					} else {
+						slideTo3(0)
+					}
+				},
+			},
+		})
+
+		function slideTo3(index) {
+			mySwiper3.slideTo(index);
+		}
+		var mySwiper4 = new Swiper('.swiper-container4', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo4(1)
+					} else {
+						slideTo4(0)
+					}
+				},
+			},
+		})
+
+		function slideTo4(index) {
+			mySwiper4.slideTo(index);
+		}
+		var mySwiper5 = new Swiper('.swiper-container5', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo5(1)
+					} else {
+						slideTo5(0)
+					}
+				},
+			},
+		})
+
+		function slideTo5(index) {
+			mySwiper5.slideTo(index);
+		}
+		var mySwiper6 = new Swiper('.swiper-container6', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo6(1)
+					} else {
+						slideTo6(0)
+					}
+				},
+			},
+		})
+
+		function slideTo6(index) {
+			mySwiper6.slideTo(index);
+		}
+		var mySwiper7 = new Swiper('.swiper-container7', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo7(1)
+					} else {
+						slideTo7(0)
+					}
+				},
+			},
+		})
+
+		function slideTo7(index) {
+			mySwiper7.slideTo(index);
+		}
+		var mySwiper8 = new Swiper('.swiper-container8', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo8(1)
+					} else {
+						slideTo8(0)
+					}
+				},
+			},
+		})
+
+		function slideTo8(index) {
+			mySwiper8.slideTo(index);
+		}
+		var mySwiper9 = new Swiper('.swiper-container9', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo9(1)
+					} else {
+						slideTo9(0)
+					}
+				},
+			},
+		})
+
+		function slideTo9(index) {
+			mySwiper9.slideTo(index);
+		}
+		var mySwiper10 = new Swiper('.swiper-container10', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo10(1)
+					} else {
+						slideTo10(0)
+					}
+				},
+			},
+		})
+
+		function slideTo10(index) {
+			mySwiper10.slideTo(index);
+		}
+		var mySwiper11 = new Swiper('.swiper-container11', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo11(1)
+					} else {
+						slideTo11(0)
+					}
+				},
+			},
+		})
+
+		function slideTo11(index) {
+			mySwiper11.slideTo(index);
+		}
+		var mySwiper12 = new Swiper('.swiper-container12', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo12(1)
+					} else {
+						slideTo12(0)
+					}
+				},
+			},
+		})
+
+		function slideTo12(index) {
+			mySwiper12.slideTo(index);
+		}
+		var mySwiper13 = new Swiper('.swiper-container13', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo13(1)
+					} else {
+						slideTo13(0)
+					}
+				},
+			},
+		})
+
+		function slideTo13(index) {
+			mySwiper13.slideTo(index);
+		}
+		var mySwiper14 = new Swiper('.swiper-container14', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo14(1)
+					} else {
+						slideTo14(0)
+					}
+				},
+			},
+		})
+
+		function slideTo14(index) {
+			mySwiper14.slideTo(index);
+		}
+		var mySwiper15 = new Swiper('.swiper-container15', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo15(1)
+					} else {
+						slideTo15(0)
+					}
+				},
+			},
+		})
+
+		function slideTo15(index) {
+			mySwiper15.slideTo(index);
+		}
+		var mySwiper16 = new Swiper('.swiper-container16', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo16(1)
+					} else {
+						slideTo16(0)
+					}
+				},
+			},
+		})
+
+		function slideTo16(index) {
+			mySwiper16.slideTo(index);
+		}
+		var mySwiper17 = new Swiper('.swiper-container17', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo17(1)
+					} else {
+						slideTo17(0)
+					}
+				},
+			},
+		})
+
+		function slideTo17(index) {
+			mySwiper17.slideTo(index);
+		}
+		var mySwiper18 = new Swiper('.swiper-container18', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo18(1)
+					} else {
+						slideTo18(0)
+					}
+				},
+			},
+		})
+
+		function slideTo18(index) {
+			mySwiper18.slideTo(index);
+		}
+		var mySwiper19 = new Swiper('.swiper-container19', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo19(1)
+					} else {
+						slideTo19(0)
+					}
+				},
+			},
+		})
+
+		function slideTo19(index) {
+			mySwiper19.slideTo(index);
+		}
+		var mySwiper20 = new Swiper('.swiper-container20', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo20(1)
+					} else {
+						slideTo20(0)
+					}
+				},
+			},
+		})
+
+		function slideTo20(index) {
+			mySwiper20.slideTo(index);
+		}
+
+		var mySwiper21 = new Swiper('.swiper-container21', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo21(1)
+					} else {
+						slideTo21(0)
+					}
+				},
+			},
+		})
+
+		function slideTo21(index) {
+			mySwiper21.slideTo(index);
+		}
+		var mySwiper22 = new Swiper('.swiper-container22', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo22(1)
+					} else {
+						slideTo22(0)
+					}
+				},
+			},
+		})
+
+		function slideTo22(index) {
+			mySwiper22.slideTo(index);
+		}
+		var mySwiper23 = new Swiper('.swiper-container23', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo23(1)
+					} else {
+						slideTo23(0)
+					}
+				},
+			},
+		})
+
+		function slideTo23(index) {
+			mySwiper23.slideTo(index);
+		}
+		var mySwiper24 = new Swiper('.swiper-container24', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo24(1)
+					} else {
+						slideTo24(0)
+					}
+				},
+			},
+		})
+
+		function slideTo24(index) {
+			mySwiper24.slideTo(index);
+		}
+		var mySwiper25 = new Swiper('.swiper-container25', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo25(1)
+					} else {
+						slideTo25(0)
+					}
+				},
+			},
+		})
+
+		function slideTo25(index) {
+			mySwiper25.slideTo(index);
+		}
+		var mySwiper26 = new Swiper('.swiper-container26', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo26(1)
+					} else {
+						slideTo26(0)
+					}
+				},
+			},
+		})
+
+		function slideTo26(index) {
+			mySwiper26.slideTo(index);
+		}
+		var mySwiper27 = new Swiper('.swiper-container27', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo27(1)
+					} else {
+						slideTo27(0)
+					}
+				},
+			},
+		})
+
+		function slideTo27(index) {
+			mySwiper27.slideTo(index);
+		}
+		var mySwiper28 = new Swiper('.swiper-container28', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo28(1)
+					} else {
+						slideTo28(0)
+					}
+				},
+			},
+		})
+
+		function slideTo28(index) {
+			mySwiper28.slideTo(index);
+		}
+
+
+		var mySwiper29 = new Swiper('.swiper-container29', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo29(1)
+					} else {
+						slideTo29(0)
+					}
+				},
+			},
+		})
+
+		function slideTo29(index) {
+			mySwiper29.slideTo(index);
+		}
+		var mySwiper30 = new Swiper('.swiper-container30', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo30(1)
+					} else {
+						slideTo30(0)
+					}
+				},
+			},
+		})
+
+		function slideTo30(index) {
+			mySwiper30.slideTo(index);
+		}
+		var mySwiper31 = new Swiper('.swiper-container31', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo31(1)
+					} else {
+						slideTo31(0)
+					}
+				},
+			},
+		})
+
+		function slideTo31(index) {
+			mySwiper31.slideTo(index);
+		}
+		var mySwiper32 = new Swiper('.swiper-container32', {
+			autoplay: true,
+			effect: 'flip',
+			delay: 3000,
+			on: {
+				click: function(swiper, s) {
+					if (this.clickedIndex == 0) {
+						slideTo32(1)
+					} else {
+						slideTo32(0)
+					}
+				},
+			},
+		})
+
+		function slideTo32(index) {
+			mySwiper32.slideTo(index);
+		}
+	</script>
+</html>
