@@ -121,3 +121,109 @@
 	} */
 	
 }
+
+@media only screen and (max-width: 620px) {
+    .paper-stuff {
+        width: 100%;
+    }
+}
+
+div.background_video_header {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 1.3em;
+  min-height: 350px;
+  width: 100%;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(./../assets/backgrounds/background4.webp);
+  background-size: cover;
+  background-position: center;
+}
+
+div.video_2 {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+div.video_container {
+  display: grid;
+}
+
+div.video_container video {
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+div.video_container div.caption {
+  grid-column: 1;
+  grid-row: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  margin: 0;
+  padding: 0;
+}
+
+div.video_container:hover div.caption {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+div.video_container div.caption div {
+  margin: 0 auto;
+  display: none;
+  font-size: 1.4em;
+  font-weight: bold;
+  padding: 25px;
+  text-align: center;
+  color: white;
+}
+
+div.video_container:hover div.caption div {
+  display: block;
+}
+
+video {
+  width: 100%;
+}
+
+div.caption {
+  margin: 0;
+  padding: 25px;
+  background-color: #333333;
+}
+
+@media (hover: none) {
+  div.mobileonly {
+    display: block;
+  }
+
+  div.nomobile {
+    display: none;
+  }
+
+  div.video_wrapper {
+    width: 100%;
+  }
+}
+
+
+@media (hover: hover) {
+  div.mobileonly {
+    display: none;
+  }
+
+  div.nomobile {
+    display: block;
+  }
+
+  div.video_wrapper {
+    width: 25%;
+  }
+}
