@@ -1,112 +1,137 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="description"
-			content="MotionZero:Exploiting Motion Priors for Zero-shot Text-to-Video Generation">
-		<meta name="keywords" content="MotionZero">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>MotionZero:Exploiting Motion Priors for Zero-shot Text-to-Video Generation</title>
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
 
-			function gtag() {
-				dataLayer.push(arguments);
-			}
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="MotionZero:Exploiting Motion Priors for Zero-shot Text-to-Video Generation">
+	<meta name="keywords" content="MotionZero">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>MotionZero:Exploiting Motion Priors for Zero-shot Text-to-Video Generation</title>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
 
-			gtag('js', new Date());
+		function gtag() {
+			dataLayer.push(arguments);
+		}
 
-			gtag('config', 'G-PYVRSFMDRL');
-		</script>
-		<link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
-		<link rel="stylesheet" href="./static/css/bulma.min.css">
-		<link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-		<link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-		<link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-		<link rel="stylesheet" href="./static/swiper.min.css">
-		<script src="./static/swiper.min.js"></script>
+		gtag('js', new Date());
 
-
-		<style>
-			@font-face {
-				font-family: 'HarmonyOS';
-				src: url('./static/font/HarmonyOS_Sans_SC_Light.ttf') format('truetype');
-			}
-
-			@font-face {
-				font-family: 'SourceHanSerifCN-Heavy';
-				src: url('./static/font/SourceHanSerifCN-Heavy.otf') format('truetype');
-			}
-		</style>
-		<link rel="stylesheet" href="./static/css/bootstrap.min.css">
-		<link rel="stylesheet" href="./static/css/layout.css">
-		<link rel="stylesheet" href="./static/css/animation.css">
-		<link rel="stylesheet" href="./static/css/media.css">
+		gtag('config', 'G-PYVRSFMDRL');
+	</script>
+	<link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+	<link rel="stylesheet" href="./static/css/bulma.min.css">
+	<link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+	<link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+	<link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+	<link rel="stylesheet" href="./static/swiper.min.css">
+	<script src="./static/swiper.min.js"></script>
 
 
-		<script src="./static/js/jquery-3.5.1.min.js"></script>
-		<script defer src="./static/js/fontawesome.all.min.js"></script>
-		<script src="./static/js/bulma-carousel.min.js"></script>
-		<script src="./static/js/bulma-slider.min.js"></script>
-	</head>
-	<body>
-		<div class="container-fluid">
-			<div class="row">
-				<img style="width:100%;" src="./static/banner.jpg" alt="" />
-			</div>
-			<div class="page-title"
-				style="padding:2vh 1vw 0vh 1vw;display:flex;flex-direction:column;align-items:center;">
-				<h1>MotionZero</h1>
-				<h2>Exploiting Motion Priors for Zero-shot Text-to-Video Generation</h2>
-			</div>
-			<div class="row">
-				<div class="col-12 link">
-					<div class="row">
-						<div class="pc-generated" style="width:100%;">
-							<div class="" style="display:flex;justify-content:center;width:100%;">
-								<div class="newTitlePc">
-									<div class="title-link">
-										<a style="color: rgb(82, 122, 188); font-style: italic;">Sitong Su</a>
-									</div>
-									<div class="title-link">
-										<a style="color: rgb(82, 122, 188); font-style: italic;">Litao Guo</a>
-									</div>
-									<div class="title-link">
-										<a style="color: rgb(82, 122, 188); font-style: italic;">Lianli Gao</a>
-									</div>
-									<div class="title-link">
-										<a style="color: rgb(82, 122, 188); font-style: italic;">Hengtao Shen</a>
-									</div>
-									<div class="title-link">
-										<a style="color: rgb(82, 122, 188); font-style: italic;">Jingkuan Song</a>
-									</div>
-									<div class="title-link mob-generated"></div>
+	<style>
+		@font-face {
+			font-family: 'HarmonyOS';
+			src: url('./static/font/HarmonyOS_Sans_SC_Light.ttf') format('truetype');
+		}
+
+		@font-face {
+			font-family: 'SourceHanSerifCN-Heavy';
+			src: url('./static/font/SourceHanSerifCN-Heavy.otf') format('truetype');
+		}
+
+	</style>
+	<link rel="stylesheet" href="./static/css/bootstrap.min.css">
+	<link rel="stylesheet" href="./static/css/layout.css">
+	<link rel="stylesheet" href="./static/css/animation.css">
+	<link rel="stylesheet" href="./static/css/media.css">
+
+
+	<script src="./static/js/jquery-3.5.1.min.js"></script>
+	<script defer src="./static/js/fontawesome.all.min.js"></script>
+	<script src="./static/js/bulma-carousel.min.js"></script>
+	<script src="./static/js/bulma-slider.min.js"></script>
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<img style="width:100%;" src="./static/banner.jpg" alt="" />
+		</div>
+		<div class="page-title" style="padding:2vh 1vw 0vh 1vw;display:flex;flex-direction:column;align-items:center;">
+			<h1>MotionZero</h1>
+			<h2>Exploiting Motion Priors for Zero-shot Text-to-Video Generation</h2>
+		</div>
+		<div class="row">
+			<div class="col-12 link">
+				<div class="row">
+					<div class="pc-generated" style="width:100%;">
+						<div class="" style="display:flex;justify-content:center;width:100%;">
+							<div class="newTitlePc">
+								<div class="title-link">
+									<a style="color: rgb(82, 122, 188); font-style: italic;">Sitong Su</a>
 								</div>
+								<div class="title-link">
+									<a style="color: rgb(82, 122, 188); font-style: italic;">Litao Guo</a>
+								</div>
+								<div class="title-link">
+									<a style="color: rgb(82, 122, 188); font-style: italic;">Lianli Gao</a>
+								</div>
+								<div class="title-link">
+									<a style="color: rgb(82, 122, 188); font-style: italic;">Hengtao Shen</a>
+								</div>
+								<div class="title-link">
+									<a style="color: rgb(82, 122, 188); font-style: italic;">Jingkuan Song</a>
+								</div>
+								<div class="title-link mob-generated"></div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="background-block row newBtnLayout">
-				<div class="newBtnLayout-shadow">
-					<div class="col-12">
-						<div class="mob-inst-text" style="padding:0 0 10px 0;text-align:center;font-size:30px;">
-							Center for Future Media, University of Electronic Science and Technology of China</div>
-					</div>
-					<div class="button-flex">
-						<a href="https://arxiv.org/pdf/2311.16635.pdf" class="button-link">
-							<span class="icon">
-								<i class="ai ai-arxiv"></i>
-							</span>
-							<span>arXiv Paper</span>
-						</a>
+		</div>
+		<div class="background-block row newBtnLayout">
+			<div class="newBtnLayout-shadow">
+				<div class="col-12">
+					<div class="mob-inst-text" style="padding:0 0 10px 0;text-align:center;font-size:30px;">
+						Center for Future Media, University of Electronic Science and Technology of China</div>
+				</div>
+				<div class="button-flex">
+					<a href="https://arxiv.org/pdf/2311.16635.pdf" class="button-link">
+						<span class="icon">
+							<i class="ai ai-arxiv"></i>
+						</span>
+						<span>arXiv Paper</span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<img style="width:100%;" src="./static/banner.jpg" alt="" />
+		</div>
+
+		<hr style="height: 5px; border: none; color: black; background-color: black;">
+		<div class="video_2" id="video_gallery" style="width: 100%">
+			<div class="video_wrapper nomobile">
+				<div class="video_container">
+					<video loop="" muted="" playsinline="" autoplay="">
+						<source src="assets/A_car_viewed_from_the_side_is_driving_forward.mp4" type="video/mp4">
+					</video>
+					<div class="caption">
+						<div>A car viewed from the side is driving forward.</div>
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<img style="width:100%;" src="./static/banner.jpg" alt="" />
+
+			<!-- <hr style="height: 5px; border: none; color: black; background-color: black;">
+    		<div class="video_2" id="video_gallery" style="width: 100%">
+			<div class="video_wrapper nomobile">
+				<div class="video_container">
+				  <video loop="" muted="" playsinline="" autoplay=""><source src="assets/A_car_viewed_from_the_side_is_driving_forward.mp4" type="video/mp4"></video>
+				  <div class="caption">
+					<div>A car viewed from the side is driving forward.</div>
+				  </div>
+				</div>
 			</div>
 
 			<hr style="height: 5px; border: none; color: black; background-color: black;">
@@ -119,92 +144,135 @@
 				  </div>
 				</div>
 			</div>
-			  
+
+			<hr style="height: 5px; border: none; color: black; background-color: black;">
+    		<div class="video_2" id="video_gallery" style="width: 100%">
+			<div class="video_wrapper nomobile">
+				<div class="video_container">
+				  <video loop="" muted="" playsinline="" autoplay=""><source src="assets/A_car_viewed_from_the_side_is_driving_forward.mp4" type="video/mp4"></video>
+				  <div class="caption">
+					<div>A car viewed from the side is driving forward.</div>
+				  </div>
+				</div>
+			</div>
+
+			<hr style="height: 5px; border: none; color: black; background-color: black;">
+    		<div class="video_2" id="video_gallery" style="width: 100%">
+			<div class="video_wrapper nomobile">
+				<div class="video_container">
+				  <video loop="" muted="" playsinline="" autoplay=""><source src="assets/A_car_viewed_from_the_side_is_driving_forward.mp4" type="video/mp4"></video>
+				  <div class="caption">
+					<div>A car viewed from the side is driving forward.</div>
+				  </div>
+				</div>
+			</div>
+
+			<hr style="height: 5px; border: none; color: black; background-color: black;">
+    		<div class="video_2" id="video_gallery" style="width: 100%">
+			<div class="video_wrapper nomobile">
+				<div class="video_container">
+				  <video loop="" muted="" playsinline="" autoplay=""><source src="assets/A_car_viewed_from_the_side_is_driving_forward.mp4" type="video/mp4"></video>
+				  <div class="caption">
+					<div>A car viewed from the side is driving forward.</div>
+				  </div>
+				</div>
+			</div>
+
+			<hr style="height: 5px; border: none; color: black; background-color: black;">
+    		<div class="video_2" id="video_gallery" style="width: 100%">
+			<div class="video_wrapper nomobile">
+				<div class="video_container">
+				  <video loop="" muted="" playsinline="" autoplay=""><source src="assets/A_car_viewed_from_the_side_is_driving_forward.mp4" type="video/mp4"></video>
+				  <div class="caption">
+					<div>A car viewed from the side is driving forward.</div>
+				  </div>
+				</div>
+			</div> -->
 
 			<script>
 
 				const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-				
+
 				if (isMobile) {
-				 hdvideos = [
-				 {"caption": "A car viewed from the side is driving forward.", "src": "assets/A_car_viewed_from_the_side_is_driving_forward.mp4"},
-				 {"caption": "A chef tossing a pizza dough in the air.", "src": "assets/A_chef_tossing_a_pizza_dough_in_the_air.mp4"},
-				 {"caption": "A cube moving to right.", "src": "assets/A_cube_moving_to_right.mp4"},
-				 {"caption": "An airplane landing on the runway.", "src": "assets/an_airplane_landing_on_the_runway.mp4"},
-				 {"caption": "A mother pushing a stroller through the park.", "src": "assets/A_mother_pushing_a_stroller_through_the_park.mp4"},
-				 {"caption": "A man playing the guitar", "src": "assets/A_man_playing_the_guitar.mp4"},
-				 {"caption": "A chef chopping vegetables in a busy restaurant.", "src": "assets/A_chef_chopping_vegetables_in_a_busy_restaurant..mp4"},
-				 {"caption": "A man skiing down a snowy mountain.", "src": "assets/A_man_skiing_down_a_snowy_mountain.mp4"},
-				];
+					hdvideos = [
+						{ "caption": "A car viewed from the side is driving forward.", "src": "assets/A_car_viewed_from_the_side_is_driving_forward.mp4" },
+						{ "caption": "A chef tossing a pizza dough in the air.", "src": "assets/A_chef_tossing_a_pizza_dough_in_the_air.mp4" },
+						{ "caption": "A cube moving to right.", "src": "assets/A_cube_moving_to_right.mp4" },
+						{ "caption": "An airplane landing on the runway.", "src": "assets/an_airplane_landing_on_the_runway.mp4" },
+						{ "caption": "A mother pushing a stroller through the park.", "src": "assets/A_mother_pushing_a_stroller_through_the_park.mp4" },
+						{ "caption": "A man playing the guitar", "src": "assets/A_man_playing_the_guitar.mp4" },
+						{ "caption": "A chef chopping vegetables in a busy restaurant.", "src": "assets/A_chef_chopping_vegetables_in_a_busy_restaurant..mp4" },
+						{ "caption": "A man skiing down a snowy mountain.", "src": "assets/A_man_skiing_down_a_snowy_mountain.mp4" },
+					];
 				} else {
 					hdvideos = [
-					{"caption": "A car viewed from the side is driving forward.", "src": "assets/A_car_viewed_from_the_side_is_driving_forward.mp4"},
-				 {"caption": "A chef tossing a pizza dough in the air.", "src": "assets/A_chef_tossing_a_pizza_dough_in_the_air.mp4"},
-				 {"caption": "A cube moving to right.", "src": "assets/A_cube_moving_to_right.mp4"},
-				 {"caption": "An airplane landing on the runway.", "src": "assets/an_airplane_landing_on_the_runway.mp4"},
-				 {"caption": "A mother pushing a stroller through the park.", "src": "assets/A_mother_pushing_a_stroller_through_the_park.mp4"},
-				 {"caption": "A man playing the guitar", "src": "assets/A_man_playing_the_guitar.mp4"},
-				 {"caption": "A chef chopping vegetables in a busy restaurant.", "src": "assets/A_chef_chopping_vegetables_in_a_busy_restaurant..mp4"},
-				 {"caption": "A man skiing down a snowy mountain.", "src": "assets/A_man_skiing_down_a_snowy_mountain.mp4"},
-				];
+						{ "caption": "A car viewed from the side is driving forward.", "src": "assets/A_car_viewed_from_the_side_is_driving_forward.mp4" },
+						{ "caption": "A chef tossing a pizza dough in the air.", "src": "assets/A_chef_tossing_a_pizza_dough_in_the_air.mp4" },
+						{ "caption": "A cube moving to right.", "src": "assets/A_cube_moving_to_right.mp4" },
+						{ "caption": "An airplane landing on the runway.", "src": "assets/an_airplane_landing_on_the_runway.mp4" },
+						{ "caption": "A mother pushing a stroller through the park.", "src": "assets/A_mother_pushing_a_stroller_through_the_park.mp4" },
+						{ "caption": "A man playing the guitar", "src": "assets/A_man_playing_the_guitar.mp4" },
+						{ "caption": "A chef chopping vegetables in a busy restaurant.", "src": "assets/A_chef_chopping_vegetables_in_a_busy_restaurant..mp4" },
+						{ "caption": "A man skiing down a snowy mountain.", "src": "assets/A_man_skiing_down_a_snowy_mountain.mp4" },
+					];
 				}
-				
-				
-				
+
+
+
 				videos = hdvideos.sort((a, b) => 0.5 - Math.random());;
-				
+
 				globalVideoIdx = 0;
-				
+
 				function updateVideoSlot(idxVideo, idxSlot) {
-				  slot = $("#video_gallery > div").eq(idxSlot);
-				
-				  src = videos[idxVideo].src;
-				  caption = videos[idxVideo].caption;
-				
-				  slot.find("div.video_container > video > source").attr("src", src);
-				  slot.find("div.video_container > video")[0].load();
-				  slot.find("div.video_container > div.caption > div").text(caption);
+					slot = $("#video_gallery > div").eq(idxSlot);
+
+					src = videos[idxVideo].src;
+					caption = videos[idxVideo].caption;
+
+					slot.find("div.video_container > video > source").attr("src", src);
+					slot.find("div.video_container > video")[0].load();
+					slot.find("div.video_container > div.caption > div").text(caption);
 				}
-				
+
 				function updateVideoGallery() {
-				  numVideos = videos.length;
-				  idxVideo = Math.floor(Math.random() * numVideos);
-				
-				  numSlots = $("#video_gallery > div").length;
-				  idxSlot = Math.floor(Math.random() * numSlots);
-				
-				  globalVideoIdx = ++globalVideoIdx % numVideos;
-				  updateVideoSlot(globalVideoIdx, idxSlot);
-				
-				  // setTimeout(updateVideoGallery, 4270);
+					numVideos = videos.length;
+					idxVideo = Math.floor(Math.random() * numVideos);
+
+					numSlots = $("#video_gallery > div").length;
+					idxSlot = Math.floor(Math.random() * numSlots);
+
+					globalVideoIdx = ++globalVideoIdx % numVideos;
+					updateVideoSlot(globalVideoIdx, idxSlot);
+
+					// setTimeout(updateVideoGallery, 4270);
 				}
-				
+
 				function updateAllVideoSlots() {
-				  numVideos = videos.length;
-				  numSlots = $("#video_gallery > div").length;
-				
-				  globalVideoIdx = Math.floor(Math.random() * numVideos);
-				  for (var i = 0; i < numSlots; ++i, ++globalVideoIdx) {
-					globalVideoIdx = globalVideoIdx % numVideos;
-					updateVideoSlot(globalVideoIdx, i);
-				  }
+					numVideos = videos.length;
+					numSlots = $("#video_gallery > div").length;
+
+					globalVideoIdx = Math.floor(Math.random() * numVideos);
+					for (var i = 0; i < numSlots; ++i, ++globalVideoIdx) {
+						globalVideoIdx = globalVideoIdx % numVideos;
+						updateVideoSlot(globalVideoIdx, i);
+					}
 				}
-				
+
 				function addVideoSlot(idx) {
-				  if (isMobile) {
-				
-					if (idx < 8) {
-					template = `
+					if (isMobile) {
+
+						if (idx < 8) {
+							template = `
 					<div class="video_wrapper mobileonly">
 					<div class="video_container">
 					  <video muted playsinline  controls="controls" preload="metadata" onclick="this.play()"><source src="videos/placeholder.mp4" type="video/mp4"></video>
 					</div>
 				  </div>
 				  `;
-				  $("#video_gallery").append(template);
-					}
-				  } else {
-				   template = `
+							$("#video_gallery").append(template);
+						}
+					} else {
+						template = `
 				  <div class="video_wrapper nomobile">
 					<div class="video_container">
 					  <video loop muted playsinline autoplay><source src="videos/placeholder.mp4" type="video/mp4"></video>
@@ -214,24 +282,168 @@
 					</div>
 				  </div>
 				  `;
-					$("#video_gallery").append(template);
-				
-				  }
-				
-				  
+						$("#video_gallery").append(template);
+
+					}
+
+
 				}
-				
+
 				function playVideo(id, src) {
-				  $(id + " video > source").attr("src", src);
-				  $(id + " video")[0].load();
+					$(id + " video > source").attr("src", src);
+					$(id + " video")[0].load();
 				}
-				
+
 				for (var i = 0; i < 7; ++i) {
-				  addVideoSlot(i);
+					addVideoSlot(i);
 				}
-				
+
 				updateAllVideoSlots();
 				// setTimeout(updateVideoGallery, 4270);
-				
-				</script>
+
+			</script>
+
+		</div>
+		<div class="background-block row mob-bottom" style="padding-bottom:5vh;">
+			<div class="col-12 Abstract-box mob-col-12" style="padding:0 !important;">
+				<div class="Abstract title-layout">
+					<h3 class="font-ma">Abstract</h3>
+				</div>
+			</div>
+			<div class="col-1"></div>
+			<div class="col-10 mob-col-12" style="padding:0;">
+				<div class="abstract-text" style="text-align:center;">
+					Zero-shot Text-to-Video synthesis generates videos based on prompts without any videos.
+Without motion information from videos, motion priors implied in prompts are vital guidance. For example, the prompt ``airplane landing on the runway" indicates motion priors that the ``airplane" moves downwards while the ``runway" stays static.
+Whereas the motion priors are not fully exploited in previous approaches, thus leading to two nontrivial issues:
+1 the motion variation pattern remains unaltered and prompt-agnostic for disregarding motion priors;
+2 the motion control of different objects is inaccurate and entangled without considering the independent motion priors of different objects.
+To tackle the two issues, we propose a prompt-adaptive and disentangled motion control strategy coined as MotionZero, which derives motion priors from prompts of different objects by Large-Language-Models and accordingly applies motion control of different objects to corresponding regions in disentanglement. 
+Furthermore, to facilitate videos with varying degrees of motion amplitude, we propose a Motion-Aware Attention scheme which adjusts attention among frames by motion amplitude. 
+Extensive experiments demonstrate that our strategy could correctly control motion of different objects and support versatile applications including zero-shot video edit.
+				</div>
+				<!-- <div class="abstract-text" style="text-align:center;">
+					Viewing the guided reverse diffusion process as solving an <strong>augmented probability flow
+						ODE (PF-ODE)</strong> , LCMs predict its solution directly in latent space, achieving super
+					fast inference with few steps.
+				</div>
+				<div class="abstract-text" style="text-align:center;">
+					A high-quality 768x768 LCM, distilled from Stable Diffusion, requires only <strong>32 A100 GPU
+						training hours</strong> (8 node for only 4 hours) for 2~4-step inference.
+				</div> -->
+			</div>
+			<div class="col-1"></div>
+		</div>
+
+	</div>
+	<div class="background-block row mob-bottom" style="padding-bottom:5vh;">
+		<div class="col-12 Abstract-box mob-col-12" style="padding:0 !important;">
+			<div class="Abstract title-layout">
+				<h3 class="font-ma">Method Overview</h3>
+			</div>
+		</div>
+	</div>
+	<div class="wrapper" style="display: flex; justify-content: center; flex-wrap: wrap; max-width: 1200px; margin: auto;">
+		<div style="flex: 0 0 80%; padding: 5px;">
+			<center>
+				<figure>
+					<video width="100%" height="auto" muted playsinline controls preload="metadata" onclick="this.play()">
+						<source src="assets/MotionZero.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+				</figure>
+			</center>
+		</div>
+	</div>
+
+		</div>
+		<div class="background-block row mob-bottom" style="padding-bottom:5vh;">
+			<div class="col-12 Abstract-box mob-col-12" style="padding:0 !important;">
+				<div class="Abstract title-layout">
+					<h3 class="font-ma">Comparison</h3>
+				</div>
+			</div>
+		</div>
+		<div class="wrapper" style="display: flex; justify-content: center; flex-wrap: wrap; max-width: 1200px; margin: auto;">
+			    <!-- New div for the image -->
+				<div style="flex: 0 0 20%; padding: 10px;">
+					<img src="assets/chef_caption.jpg" alt="Your Image Description" style="max-width: 100%; height: auto;">
+				</div>
+			<div style="flex: 0 0 20%; padding: 10px;">
+				<center>
+					<figure>
+						<video width="100%" height="auto" muted playsinline controls preload="metadata" onclick="this.play()">
+							<source src="assets/chef_zero.mp4" type="video/mp4">
+							Your browser does not support the video tag.
+						</video>
+						<figcaption class="caption">
+							Text2Video-Zero
+						</figcaption>
+					</figure>
+				</center>
+			</div>
+			<div style="flex: 0 0 20%; padding: 10px;">
+				<center>
+					<figure>
+						<video width="100%" height="auto" muted playsinline controls preload="metadata" onclick="this.play()">
+							<source src="assets/chef_cog.mp4" type="video/mp4">
+							Your browser does not support the video tag.
+						</video>
+						<figcaption class="caption">
+							CogVideo
+						</figcaption>
+					</figure>
+				</center>
+			</div>
+			<div style="flex: 0 0 20%; padding: 10px;">
+				<center>
+					<figure>
+						<video width="100%" height="auto" muted playsinline controls preload="metadata" onclick="this.play()">
+							<source src="assets/chef_direct.mp4" type="video/mp4">
+							Your browser does not support the video tag.
+						</video>
+						<figcaption class="caption">
+							DirecT2V
+						</figcaption>
+					</figure>
+				</center>
+			</div>
+			<div style="flex: 0 0 20%; padding: 10px;">
+				<center>
+					<figure>
+						<video width="100%" height="auto" muted playsinline controls preload="metadata" onclick="this.play()">
+							<source src="assets/A_chef_chopping_vegetables_in_a_busy_restaurant..mp4" type="video/mp4">
+							Your browser does not support the video tag.
+						</video>
+						<figcaption class="caption">
+							MotionZero
+						</figcaption>
+					</figure>
+				</center>
+			</div>
+		</div>
+		
+
+		<div class="background-block row mob-bottom" style="padding-bottom:5vh;">
+			<div class="col-12 Abstract-box mob-col-12" style="padding:0 !important;">
+				<div class="Abstract title-layout">
+					<h3 class="font-ma">BibTeX</h3>
+				</div>
+			</div>
+			<div class="col-10 mob-col-12 abstract-text-box" style="padding:0;">
+
+			</div>
+			<div class="col-12">
+				<div class="code" style="width:100%;">
+					<pre>@article{su2023motionzero,
+						title={MotionZero: Exploiting Motion Priors for Zero-shot Text-to-Video Generation},
+						author={Su, Sitong and Guo, Litao and Gao, Lianli and Shen, Hengtao and Song, Jingkuan},
+						journal={arXiv preprint arXiv:2311.16635},
+						year={2023}
+					  }</pre>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </html>
